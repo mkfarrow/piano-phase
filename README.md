@@ -4,6 +4,8 @@
 
 This web page allows users to simulate Steve Reich's composition *Piano Phase* both visually and auditorily. The page uses the [Web Audio API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API) and some other cool modern browser features.
 
+![screenshot](./screenshot.GIF)
+
 ## Background
 
 *Piano Phase* is a piece of music composed by the legendary Steve Reich in 1967. It is one of Reich's first applications of his "[phasing](https://en.wikipedia.org/wiki/Phase_music)" technique, which can also be heard elsewhere in his work (notably *Come Out* and *It's Gonna Rain*).
