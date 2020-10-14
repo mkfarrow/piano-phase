@@ -24,4 +24,4 @@ By default the simulator is programmed to use Steve Reich's 12-note sequence fro
 
 Each of the two voices is visualized as a sequence of colored circles revolving around a radius. The visualization is perhaps best understood as a dance:
 
-<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/RTke1tQztpQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/RTke1tQztpQ/0.jpg)](https://www.youtube.com/watch?v=YOUTUBE_VIDEO_ID_HERE)
