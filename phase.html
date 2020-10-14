@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Steve Reich Simulator</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+    <!-- shim -->
+    <script src="./lib/Base64.js" type="text/javascript"></script>
+    <script src="./lib/Base64binary.js" type="text/javascript"></script>
+    <script src="./lib/WebAudioAPI.js" type="text/javascript"></script>
+
+    <!-- midi.js package -->
+    <script src="./lib/midi/audioDetect.js" type="text/javascript"></script>
+    <script src="./lib/midi/gm.js" type="text/javascript"></script>
+    <script src="./lib/midi/loader.js" type="text/javascript"></script>
+    <script src="./lib/midi/plugin.audiotag.js" type="text/javascript"></script>
+    <script src="./lib/midi/plugin.webaudio.js" type="text/javascript"></script>
+    <script src="./lib/midi/plugin.webmidi.js" type="text/javascript"></script>
+    <script src="./lib/midi/player.js" type="text/javascript"></script>
+
+    <!-- utils -->
+    <script src="./lib/dom_request_xhr.js" type="text/javascript"></script>
+    <script src="./lib/dom_request_script.js" type="text/javascript"></script>
+    <script src="./lib/teoria.js" type="text/javascript"></script>
+    <script src="./lib/tuna.js" type="text/javascript"></script>
+
+    <!-- style -->
+    <link href='https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="phase.css" />
+</head>
+
+<body>
+
+    <canvas id="mycanvas" width="550" height="550"></canvas>
+
+    <div id="stew-container">
+        <div id="refine">
+            <fieldset id="noteField">
+                <label>
+                    <span>Enter a sequence of notes</span>
+                    <div id="seqNoteExample">
+                        <p>You can use
+                            <a class="scientific" href="https://en.wikipedia.org/wiki/Scientific_pitch_notation">scientific</a> or
+                            <a class="helmholtz" href="https://en.wikipedia.org/wiki/Helmholtz_pitch_notation">Helmholtz</a> notation.
+                        </p>
+                        <p id="eg">e.g.</p>
+                        <p class="noteExample scientific">E4 f#4 b4 c#5 D5 f#4 a ...</p>
+                        <p class="noteExample helmholtz">ab' g'' D#'' Ab' b' C' ...</p>
+                    </div>
+                    <textarea id="seqNote" rows="3"></textarea>
+                </label>
+
+                <table id="presetLicks">
+                </table>
+            </fieldset>
+
+            <fieldset id="soundField">
+                <div id="duration">
+                    <label>
+                        <span>Note duration</span>
+                        <br />
+                        <input type="number" id="inputBpm" /> bpm
+                    </label>
+                </div>
+                <div id="instrument">
+                    <label>
+                        <span>Instrument</span>
+                        <br />
+                        <select id="selInstr"></select>
+                    </label>
+                </div>
+                <div id="rate">
+                    <label>
+                        <span>Phase rate</span>
+                        <br />
+                        <input type="range" id="inputRate" />
+                        <p id="outputRate"></p>
+                    </label>
+                </div>
+            </fieldset>
+
+            <fieldset id="controlField">
+                <button id="btnStart">Start</button>
+                <button id="btnStop">Stop</button>
+            </fieldset>
+        </div>
+
+        <div id="relatedDiv">
+            <!-- <ul id="related"> -->
+            <fieldset>
+                <p><a href="https://github.com/saebekassebil/teoria">teoria: js music theory</a></p>
+                <p><a href="https://github.com/mudcube/MIDI.js/">midi.js</a></p><br />
+                <p><a href="https://dvcs.w3.org/hg/audio/raw-file/tip/webaudio/specification.html">web audio api</a></p>
+                <p><a href="https://github.com/gleitz/midi-js-soundfonts">midi-soundfonts-js</a></p>
+                <p><a href="http://webaudio.github.io/web-midi-api/">web midi api</a></p>
+            </fieldset>
+            <!-- </ul> -->
+
+        </div>
+
+    </div>
+    <script src="./phase.js" type="text/javascript"></script>
+</body>
+
+</html>
