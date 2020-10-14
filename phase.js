@@ -285,7 +285,7 @@ function beginPhase(stInstr, rgnote, bpm, sfSpeed) {
    stopAll();
 
    MIDI.loadPlugin({
-      soundfontUrl: '../static/midi-js-soundfonts/FluidR3_GM/',
+      soundfontUrl: './midi-js-soundfonts/FluidR3_GM/',
       instrument: stInstr,
       onsuccess: function() {
          MIDI.programChange(0, MIDI.GM.byName[stInstr].number);
