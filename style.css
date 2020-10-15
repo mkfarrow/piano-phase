@@ -1,3 +1,32 @@
+
 canvas {
-    float: left;
+    /* float: left; */
+    width: 100%;
+    /* margin-top: 2em; */
+    padding: 1em;
+}
+
+textarea {
+    width: 100%;
+}
+
+#preset button {
+    margin-right: 1em;
+}
+
+.title {
+    font-style: italic;
+}
+
+.important {
+    font-weight: bold;
+}
+
+#inputBpm {
+    width: 5em;
+}
+
+#control-field button {
+    display: inline-block;
+    width: 50%;
 }

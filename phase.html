@@ -26,92 +26,135 @@
     <script src="./lib/tuna.js" type="text/javascript"></script>
 
     <!-- style -->
-    <link href='https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
-    
-    <script
-        src="https://code.jquery.com/jquery-3.5.1.min.js"
-        integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
-        crossorigin="anonymous"></script>
+    <link href='https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic,700italic' rel='stylesheet'
+        type='text/css'>
 
-    <!-- <link rel="stylesheet" type="text/css" href="phase.css" /> -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"
+        integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
+    <div class="container">
 
-    <canvas id="mycanvas" width="550" height="550"></canvas>
+        <div class="row">
+            <h1>Steve Reich's <span class="title">Piano Phase</span> Simulator</h1>
 
-    <div id="stew-container">
-        <div id="refine">
-
-            <fieldset id="note-sequence-field">
-                <legend>Note Sequence</legend>
-                    <p>
-                        Enter a sequence of notes. You can use
-                        <a class="scientific" href="https://en.wikipedia.org/wiki/Scientific_pitch_notation">scientific</a>
-                        (e.g.
-                        <code class="noteExample scientific">E4 f#4 b4 c#5 D5 f#4 a</code>...)
-                        or
-                        <a class="helmholtz" href="https://en.wikipedia.org/wiki/Helmholtz_pitch_notation">Helmholtz</a>
-                        (e.g.
-                        
-                        <code class="noteExample helmholtz">ab' g'' D#'' Ab' b' C'</code>...)
-                        notation.
-                    </p>
-                    <textarea id="note-seq-input" rows="3"></textarea>
-
-                <p id="preset">
-                    Presets:
-                </p>
-
-            </fieldset>
-
-            <fieldset id="tempo-timbre-field">
-                <legend>Tempo and Tone</legend>
-                <div id="duration">
-                    <label>
-                        <span>Tempo</span>
-                        <!-- <br /> -->
-                        <input type="number" id="inputBpm" /> bpm
-                    </label>
-                </div>
-                <div id="instrument">
-                    <label>
-                        <span>Instrument</span>
-                        <!-- <br /> -->
-                        <select id="instr-select"></select>
-                    </label>
-                </div>
-            </fieldset>
-
-            <fieldset id="phase-rate-field">
-                <legend>Phase Rate</legend>
-                <input type="range" id="rate-input" max="1.2" min="0.8" step="0.01" value="1.01" />
-                <div id="phase-rate-display">
-                    <span></span>
-                </div>
-            </fieldset>
-
-            <fieldset id="control-field">
-                <legend>Playback Controls</legend>
-                <button id="btn-start">Start</button>
-                <button id="btn-stop">Stop</button>
-            </fieldset>
+            <p class="notice">
+                <span class="important">Note:</span> This page uses sound! Adjust the volume level on your speakers or
+                headphones before pressing "Start"!
+                <br>
+                More info at <code><a href="https://github.com/mkfarrow/piano-phase">https://github.com/mkfarrow/piano-phase</a></code>
+            </p>
         </div>
 
-        <div>
+        <div class="row">
+            <div class="col-lg-6 col-md-8">
+                <canvas id="mycanvas" width="550" height="550"></canvas>
+            </div>
+
+            <div id="stew-container" class="col-lg-6 col-md-4">
+                <div id="refine">
+
+
+                    <div id="control-field" class="form-group fieldset">
+                        <legend>Playback Controls</legend>
+                        <button id="btn-start">Start</button><button id="btn-stop" disabled="true">Stop</button>
+                    </div>
+                    
+                    <div id="phase-rate-field" class="form-group fieldset">
+                        <legend>Phase Rate: <code id="phase-rate-display"> <span></span></code></legend>
+                        <div class="phase-container">
+                            <input type="range" id="rate-input" max="1.2" min="0.8" step="0.01" value="1.01" />
+                            <div id="phase-rate-display">
+                                <span></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="note-sequence-field" class="form-group fieldset">
+                        <legend>Note Sequence</legend>
+                        <p>
+                            Enter a sequence of notes. You can use
+                            <a class="scientific"
+                                href="https://en.wikipedia.org/wiki/Scientific_pitch_notation">scientific</a>
+                            (e.g.
+                            <code class="noteExample scientific">E4 f#4 b4 c#5 D5 f#4 a</code>...)
+                            or
+                            <a class="helmholtz"
+                                href="https://en.wikipedia.org/wiki/Helmholtz_pitch_notation">Helmholtz</a>
+                            (e.g.
+
+                            <code class="noteExample helmholtz">ab' g'' D#'' Ab' b' C'</code>...)
+                            notation.
+                        </p>
+                        <textarea id="note-seq-input" rows="3"></textarea>
+
+
+                        <div id="preset">
+                            <span class="important">Presets:</span>
+                        </div>
+
+                    </div>
+
+                    <div id="tempo-timbre-field" class="form-group fieldset">
+                        <legend>Tempo and Tone</legend>
+                        <div id="duration">
+                            <label>
+                                <span>Tempo</span>
+                                <!-- <br /> -->
+                                <input type="number" id="inputBpm" /> bpm
+                            </label>
+                        </div>
+                        <div id="instrument">
+                            <label>
+                                <span>Instrument</span>
+                                <!-- <br /> -->
+                                <select id="instr-select"></select>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+        <div id="about">
+            <h2>About this webpage</h2>
+            <h3>Controls</h3>
+
+            <p>
+                By default the simulator is programmed to use Steve Reich's 12-note sequence from Piano Phase, but users can change the note sequence by typing in their own notes and melodies. There are a number of different instruments that can be chosen for playback. Users can change the tempo as well as alter the phase rate of the two voices.
+            </p>
+
+            <h3>The Visualization</h3>
+
+            <p>
+                There are two voices that repeat the programmed sequence of notes. Each note is visualized as a colored circle which sounds as it crosses the line on the x-axis. The notes of each voice orbit the center. The auditory "phasing" can be seen in the orbits of the two sequences of circles: they orbit farther from each other as the voices are more out-of-phase, and as the voices sync back into phase, the two sequences of circles overlap.
+
+                The visualization is perhaps best understood by watching these two dancers:
+            </p>
+            
+            <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/RTke1tQztpQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+
+            <h3>Related software</h3>
             <ul id="related">
-            <!-- <fieldset> -->
+                <!-- <div> -->
                 <li><a href="https://github.com/saebekassebil/teoria">teoria: js music theory</a></li>
                 <li><a href="https://github.com/mudcube/MIDI.js/">midi.js</a></li>
-                <li><a href="https://dvcs.w3.org/hg/audio/raw-file/tip/webaudio/specification.html">web audio api</a></li>
+                <li><a href="https://dvcs.w3.org/hg/audio/raw-file/tip/webaudio/specification.html">web audio
+                        api</a></li>
                 <li><a href="https://github.com/gleitz/midi-js-soundfonts">midi-soundfonts-js</a></li>
                 <li><a href="http://webaudio.github.io/web-midi-api/">web midi api</a></li>
-            <!-- </fieldset> -->
+                <!-- </div> -->
             </ul>
-
         </div>
-
     </div>
     <script src="./phase.js" type="text/javascript"></script>
 </body>

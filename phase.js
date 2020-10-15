@@ -206,6 +206,7 @@ function populateSeqNote() {
       $('<button>')
          .html(lick.name)
          .val(lick.value.join(' '))
+         // .attr('type', 'button')
          .click(function(event) {
             $('#note-seq-input').val($(event.target).val());
          })
