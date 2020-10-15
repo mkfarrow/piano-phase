@@ -252,7 +252,7 @@ function setupButtons() {
 }
 
 function setDisabled(isDisabled) {
-   $('#note-sequence-field, #tempo-timbre-field, #phase-rate-field')
+   $('#rate-input, #inputBpm, #instr-select, #note-seq-input, #note-sequence-field button')
       .attr('disabled', isDisabled);
    $('#btn-start').attr('disabled', isDisabled);
    $('#btn-stop').attr('disabled', !isDisabled);
