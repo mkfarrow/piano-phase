@@ -47,7 +47,8 @@
             <p class="notice">
                 <span class="important">Note:</span> This page uses sound! Adjust the volume level on your speakers or
                 headphones before pressing "Start"!
-                <br>
+            </p>
+            <p>
                 More info at <code><a href="https://github.com/mkfarrow/piano-phase">https://github.com/mkfarrow/piano-phase</a></code>
             </p>
         </div>
@@ -66,12 +67,45 @@
                         <button id="btn-start">Start</button><button id="btn-stop" disabled="true">Stop</button>
                     </div>
                     
-                    <div id="phase-rate-field" class="form-group fieldset">
+                    <!-- <div id="phase-rate-field" class="form-group fieldset">
                         <legend>Phase Rate: <code id="phase-rate-display"> <span></span></code></legend>
                         <div class="phase-container">
                             <input type="range" id="rate-input" max="1.2" min="0.8" step="0.01" value="1.01" />
                             <div id="phase-rate-display">
                                 <span></span>
+                            </div>
+                        </div>
+                    </div> -->
+
+                    <div class="row">
+                        <div class="col-lg-5">
+                            <div id="phase-rate-field" class="form-group fieldset">
+                                <legend>Phase Rate: <code id="phase-rate-display"><span></span></code></legend>
+                                <div class="phase-container">
+                                    <input type="range" id="rate-input" max="1.2" min="0.8" step="0.01" value="1.01" />
+                                    <div id="phase-rate-display">
+                                        <span></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-7">
+                            <div id="tempo-timbre-field" class="form-group fieldset">
+                                <legend>Audio Options</legend>
+                                <div id="duration">
+                                    <label>
+                                        <span>Tempo</span>
+                                        <!-- <br /> -->
+                                        <input type="number" id="inputBpm" /> bpm
+                                    </label>
+                                </div>
+                                <div id="instrument">
+                                    <label>
+                                        <span>Instrument</span>
+                                        <!-- <br /> -->
+                                        <select id="instr-select"></select>
+                                    </label>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -101,23 +135,21 @@
 
                     </div>
 
-                    <div id="tempo-timbre-field" class="form-group fieldset">
+                    <!-- <div id="tempo-timbre-field" class="form-group fieldset">
                         <legend>Tempo and Tone</legend>
                         <div id="duration">
                             <label>
                                 <span>Tempo</span>
-                                <!-- <br /> -->
                                 <input type="number" id="inputBpm" /> bpm
                             </label>
                         </div>
                         <div id="instrument">
                             <label>
                                 <span>Instrument</span>
-                                <!-- <br /> -->
                                 <select id="instr-select"></select>
                             </label>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
 
