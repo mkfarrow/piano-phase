@@ -2,7 +2,7 @@
 
 ## Overview
 
-This web page allows users to simulate Steve Reich's composition *Piano Phase* both visually and auditorily. The page uses the [Web Audio API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API) and some other cool modern browser features.
+This web page allows users to simulate Steve Reich's composition *Piano Phase* both visually and auditorily. The page uses the [Web Audio API](https://www.w3.org/TR/webaudio/), the [Web Midi API](https://www.w3.org/TR/webmidi/), and some other cool modern browser features.
 
 ![screenshot](./screenshot.GIF)
 
@@ -24,6 +24,8 @@ By default the simulator is programmed to use Steve Reich's 12-note sequence fro
 
 ### The Visualization
 
-Each of the two voices is visualized as a sequence of colored circles (each circle representing one note) revolving around a radius. The visualization is perhaps best understood as a dance (click the image below for a video!):
+There are two voices that repeat the programmed sequence of notes. Each note is visualized as a colored circle which sounds as it crosses the line on the x-axis. The notes of each voice orbit the center. The auditory "phasing" can be seen in the orbits of the two sequences of circles: they orbit farther from each other as the voices are more out-of-phase, and as the voices sync back into phase, the two sequences of circles overlap.
 
-[![Piano Phase dance](https://img.youtube.com/vi/RTke1tQztpQ/0.jpg)](https://www.youtube.com/watch?v=RTke1tQztpQ)
+The visualization is perhaps best understood by watching these two dancers:
+
+[(Click for video)![Piano Phase dance](https://img.youtube.com/vi/RTke1tQztpQ/0.jpg)](https://www.youtube.com/watch?v=RTke1tQztpQ)
