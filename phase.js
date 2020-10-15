@@ -7,13 +7,13 @@ var PI = Math.PI;
 var PI2 = Math.PI * 2;
 var dc = document.getElementById('mycanvas').getContext('2d');
 
-var Voice = function(frTempo, radius) {
+var Voice = function (frTempo, radius) {
    this.frTempo = frTempo;
    this.tines = [];
    this.timePlayed = [];
 };
 
-var Phase = function(rgnote, frTempo, dtsTotal) {
+var Phase = function (rgnote, frTempo, dtsTotal) {
    this.animRequestID = null;
    this.rgnote = rgnote;
    this.r = RADIUS;
@@ -28,25 +28,25 @@ var Phase = function(rgnote, frTempo, dtsTotal) {
    this.timeStart = null;
 };
 
-Phase.prototype.fPlayNote = function(voice, inote, rdCur) {
+Phase.prototype.fPlayNote = function (voice, inote, rdCur) {
    var rdPrev = voice.tines[inote];
    return rdCur === 0 || (Math.floor(rdCur / PI2) !== Math.floor(rdPrev / PI2));
 };
 
-Phase.prototype.colorHsla = function(voice, inote, time) {
+Phase.prototype.colorHsla = function (voice, inote, time) {
    var huev = (inote / this.rgnote.length) * 360;
    var satv = Math.round(100 * Math.min(1, (time - voice.timePlayed[inote]) / 1000.0));
    var lumv = Math.round(100 * Math.max(0.5, 1 - (time - voice.timePlayed[inote]) / 1000.0));
    return 'hsla(' + huev + ',' + satv + '%,' + lumv + '%,1)';
 };
 
-Phase.prototype.sizeForNote = function(voice, inote, time) {
+Phase.prototype.sizeForNote = function (voice, inote, time) {
    var noteRadius = 10;
    var sizeTimeScale = 2 - Math.min(1, (time - voice.timePlayed[inote]) / 1000.0);
    return noteRadius * sizeTimeScale;
 };
 
-Phase.prototype.radius = function(voice, rdThis) {
+Phase.prototype.radius = function (voice, rdThis) {
    if (voice === this.voiceMain) return this.r;
 
    // normalize the angles so they are in the range [0, 2 * PI]
@@ -60,11 +60,11 @@ Phase.prototype.radius = function(voice, rdThis) {
    return this.r - (this.r - MIN_RADIUS) * angleBetween / PI;
 };
 
-Phase.prototype.drawVoices = function() {
+Phase.prototype.drawVoices = function () {
    var time = (new Date()).getTime();
    if (!this.timeStart) this.timeStart = time;
 
-   this.rgvoice.forEach(function(voice) {
+   this.rgvoice.forEach(function (voice) {
       var percentDone = ((time - this.timeStart) / 1000) / (this.dtsTotal * voice.frTempo);
       var rdExtra = percentDone * PI2;
       var radiusThis = this.radius(voice, rdExtra);
@@ -90,14 +90,14 @@ Phase.prototype.drawVoices = function() {
    }, this);
 };
 
-Phase.prototype.draw = function() {
+Phase.prototype.draw = function () {
    drawGrid();
    this.drawVoices();
    this.doAnim();
 };
 
-Phase.prototype.init = function() {
-   this.rgvoice.forEach(function(voice) {
+Phase.prototype.init = function () {
+   this.rgvoice.forEach(function (voice) {
       for (var inote = 0; inote < this.rgnote.length; inote++) {
          voice.tines[inote] = -(PI2 / this.rgnote.length) * inote;
          voice.timePlayed[inote] = 0;
@@ -106,14 +106,14 @@ Phase.prototype.init = function() {
    this.doAnim();
 };
 
-Phase.prototype.dispose = function() {
+Phase.prototype.dispose = function () {
    if (this.animRequestID) window.cancelAnimationFrame(this.animRequestID);
    dc.clearRect(0, 0, DUCANVAS, DUCANVAS);
 };
 
-Phase.prototype.doAnim = function() {
+Phase.prototype.doAnim = function () {
    var phaseThis = this;
-   this.animRequestID = window.requestAnimationFrame(function() {
+   this.animRequestID = window.requestAnimationFrame(function () {
       phaseThis.draw();
    });
 };
@@ -128,54 +128,54 @@ var RGINSTR = [
    {
       name: 'Piano',
       value: 'acoustic_grand_piano'
-},
+   },
    {
       name: 'Banjo',
       value: 'banjo'
-},
+   },
    {
       name: 'Cello',
       value: 'cello'
-},
+   },
    {
       name: 'Gtr clean',
       value: 'electric_guitar_jazz'
-}, {
+   }, {
       name: 'Gtr dist.',
       value: 'distortion_guitar'
-}, {
+   }, {
       name: 'Goblins',
       value: 'fx_6_goblins'
-}, {
+   }, {
       name: 'Harmonics',
       value: 'guitar_harmonics'
-}, {
+   }, {
       name: 'Harpsichord',
       value: 'harpsichord'
-}, {
+   }, {
       name: 'Koto',
       value: 'koto'
-}, {
+   }, {
       name: 'Pizzicato',
       value: 'pizzicato_strings'
-}, {
+   }, {
       name: 'Shamisen',
       value: 'shamisen'
-}, {
+   }, {
       name: 'Slap bass',
       value: 'slap_bass_1'
-}, {
+   }, {
       name: 'Sitar',
       value: 'sitar'
-}, {
+   }, {
       name: 'Whistle',
       value: 'whistle'
-}];
+   }];
 
 var RGPRESET_LICKS = [
    {
-      name: "Piano Phase",
-      value: RGSTNOTE_PIANO_PHASE
+      name: "Piano Phase (Steve Reich)",
+      value: RGSTNOTE_PIANO_PHASE.concat(RGSTNOTE_PIANO_PHASE)
    },
    {
       name: "'The Lick'",
@@ -184,73 +184,78 @@ var RGPRESET_LICKS = [
    {
       name: "A harmonic minor",
       value: ["A2", "B2", "C3", "D3", "E3", "F3", "G#3",
-               "A3", "B3", "C4", "D4", "E4", "F4", "G#4", "A4"]
+         "A3", "B3", "C4", "D4", "E4", "F4", "G#4", "A4"]
    }
 ];
 
 var phase = null;
 
-window.onload = function() {
+$(document).ready(function(){
    populateSeqNote();
-   populateWith('#selInstr', RGINSTR);
+   populateWith('#instr-select', RGINSTR);
    setupRateInput();
    setupBpm();
    setupButtons();
    drawGrid();
-};
+});
 
 function populateSeqNote() {
-   var textArea = document.querySelector("#seqNote");
-   textArea.innerHTML = RGSTNOTE_PIANO_PHASE.concat(RGSTNOTE_PIANO_PHASE).join(' ');
-
-   var table = document.querySelector("#presetLicks");
-   RGPRESET_LICKS.forEach(function(lick) {
-      var row = document.createElement("tr");
-      var tdName = document.createElement("td");
-      tdName.innerHTML = lick.name;
-      var tdNotes = document.createElement("td");
-      tdNotes.innerHTML = lick.value.join(' ');
-      row.appendChild(tdName);
-      row.appendChild(tdNotes);
-      table.appendChild(row);
-   });
+   $('#note-seq-input')
+      .val(RGSTNOTE_PIANO_PHASE.concat(RGSTNOTE_PIANO_PHASE).join(' '));
+   RGPRESET_LICKS.forEach(lick => {
+      $('<button>')
+         .html(lick.name)
+         .val(lick.value.join(' '))
+         .click(function(event) {
+            $('#note-seq-input').val($(event.target).val());
+         })
+         .appendTo('#preset');
+   })
 }
 
 function populateWith(stElementID, rgobj) {
    var selectNode = document.querySelector(stElementID);
-   rgobj.map(function(thing) {
+   rgobj.map(function (thing) {
       var opt = document.createElement('option');
       opt.innerHTML = thing.name;
       return opt;
-   }).forEach(function(option) {
+   }).forEach(function (option) {
       selectNode.appendChild(option);
    });
 }
 
 function setupRateInput() {
-   var rateInput = document.querySelector("#inputRate");
-   var rateOutput = document.querySelector("#outputRate");
+   var rateInput = document.querySelector("#rate-input");
+   var rateOutput = document.querySelector("#phase-rate-display span");
 
-   var min = 0.8,
-      max = 1.2,
-      step = 0.01,
-      value = 1.01;
+   var value = 1.01;
 
-   rateInput.setAttribute("min", min);
-   rateInput.setAttribute("max", max);
-   rateInput.setAttribute("step", step);
-   rateInput.setAttribute("value", value);
+   rateInput.value = value;
 
    rateOutput.innerHTML = value;
    rateInput.oninput = updateRateDisplay;
 }
 
 function setupButtons() {
-   var btnStart = document.querySelector("#btnStart");
-   btnStart.onclick = doUserStart;
+   var btnStart = document.querySelector("#btn-start");
+   btnStart.onclick = function(event) { 
+      doUserStart();
+      setDisabled(true);
+   }
 
-   var btnStop = document.querySelector("#btnStop");
-   btnStop.onclick = stopAll;
+   var btnStop = document.querySelector("#btn-stop");
+   btnStop.onclick = function(event) {
+      stopAll();
+      setDisabled(false);
+   }
+}
+
+function setDisabled(isDisabled) {
+   $('#note-sequence-field, #tempo-timbre-field, #phase-rate-field')
+      .attr('disabled', isDisabled);
+   $('#btn-start').attr('disabled', isDisabled);
+   $('#btn-stop').attr('disabled', !isDisabled);
+
 }
 
 function setupBpm() {
@@ -264,19 +269,19 @@ function setupBpm() {
 }
 
 function updateRateDisplay() {
-   var rateInput = document.querySelector("#inputRate");
-   var rateOutput = document.querySelector("#outputRate");
+   var rateInput = document.querySelector("#rate-input");
+   var rateOutput = document.querySelector("#phase-rate-display span");
    rateOutput.innerHTML = rateInput.value;
 }
 
 function doUserStart() {
-   var stInstr = RGINSTR[document.querySelector('#selInstr').selectedIndex].value;
-   var stSeqNote = document.querySelector('#seqNote').value;
+   var stInstr = RGINSTR[document.querySelector('#instr-select').selectedIndex].value;
+   var stSeqNote = document.querySelector('#note-seq-input').value;
    var rgstNote = stSeqNote.trim().split(/\s+/);
    var rgnote = rgstNote.map(teoria.note);
 
    var bpm = document.querySelector("#inputBpm").value;
-   var sf = document.querySelector("#inputRate").value;
+   var sf = document.querySelector("#rate-input").value;
 
    beginPhase(stInstr, rgnote, bpm, sf);
 }
@@ -287,7 +292,7 @@ function beginPhase(stInstr, rgnote, bpm, sfSpeed) {
    MIDI.loadPlugin({
       soundfontUrl: './midi-js-soundfonts/FluidR3_GM/',
       instrument: stInstr,
-      onsuccess: function() {
+      onsuccess: function () {
          MIDI.programChange(0, MIDI.GM.byName[stInstr].number);
          var dtsTotal = (1 / (bpm / 60)) * rgnote.length;
          phase = new Phase(rgnote, sfSpeed, dtsTotal);

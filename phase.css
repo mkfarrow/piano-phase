@@ -76,7 +76,7 @@ input, textarea, select {
     display: inline;
     margin-right: 30px;
 }
-#soundField {
+#sound-field {
     text-align: center;
 }
 #duration {
@@ -101,7 +101,7 @@ input, textarea, select {
 #btnGo {
     float: left;
 }
-#btnStop {
+#btn-stop {
     float: right;
 }
 #seqNoteExample {
