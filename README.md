@@ -28,4 +28,10 @@ There are two voices that repeat the programmed sequence of notes. Each note is 
 
 The visualization is perhaps best understood by watching these two dancers:
 
+<style>
+    img {
+        display:block;
+    }
+</style>
+
 [(Click for video)![Piano Phase dance](https://img.youtube.com/vi/RTke1tQztpQ/0.jpg)](https://www.youtube.com/watch?v=RTke1tQztpQ)
